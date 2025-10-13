@@ -34,7 +34,7 @@
   #     msg: "{{ item.instance[0].private_ip_addresses }}"
   #   loop: "{{ ec2_output.results }}"
 
-  - name: add r53 record
+  - name: create route53 record
     amazon.aws.route53:
       state: present
       zone: "{{ DOMAIN_NAME }}"
