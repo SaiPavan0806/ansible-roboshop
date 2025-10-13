@@ -24,12 +24,23 @@
   #   ansible.builtin.debug:
   #     msg: "{{ ec2_output}}"
       
-  - name: print public_ip
-    ansible.builtin.debug:
-      msg: "{{ item.instance[0].public_ip_address }}"
-    loop: "{{ ec2_output.results }}"
+  # - name: print public_ip
+  #   ansible.builtin.debug:
+  #     msg: "{{ item.instance[0].public_ip_address }}"
+  #   loop: "{{ ec2_output.results }}"
 
-  - name: print private_ip
-    ansible.builtin.debug:
-      msg: "{{ item.instance[0].private_ip_addresses }}"
+  # - name: print private_ip
+  #   ansible.builtin.debug:
+  #     msg: "{{ item.instance[0].private_ip_addresses }}"
+  #   loop: "{{ ec2_output.results }}"
+
+  - name: add r53 record
+    amazon.aws.route53::
+      state: present
+      zone: "{{ DOMAIN_NAME }}"
+      record: "{{ item.item }}.{{ DOMAIN_NAME }}"
+      type: A
+      ttl: 1
+      value: "{{ item.instance[0].private_ip_addresses }}"
+      overwrie: true
     loop: "{{ ec2_output.results }}"
