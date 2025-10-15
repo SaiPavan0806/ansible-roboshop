@@ -7,10 +7,12 @@
     ZONE_ID: Z0531895FHVQAQ3TAJWF
     DOMAIN_NAME: daws86s.online
     instance: 
-    - mongodb
-    - redis
-    - mysql
-    - rabbitmq
+    
+    # we can use command line to create instances as well if there are multiple instances to be created.
+    # - mongodb
+    # - redis
+    # - mysql
+    # - rabbitmq
   tasks:
   - name: create ec2 instance
     amazon.aws.ec2_instance:
