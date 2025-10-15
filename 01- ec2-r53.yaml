@@ -8,7 +8,7 @@
     DOMAIN_NAME: daws86s.online
     instance: 
     
-    # we can use command line to create instances as well if there are multiple instances to be created.
+    # we can use command line to create instances by giving -e if there are multiple instances to be created.
     # - mongodb
     # - redis
     # - mysql
